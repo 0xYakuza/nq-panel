@@ -12,10 +12,8 @@ import { revalidatePath } from "next/cache";
 import { getUser } from "../../user";
 
 async function editUser(uuid: string, formData: FormData) {
-    let profile_image: string | null = formData.get("profile_image")?.toString()!
-    if (profile_image === "") {
-        profile_image = null;
-    }
+    let profile_image: string | null = formData.get("profile_image")?.toString()! || null;
+
     const user = {
         username: formData.get("username")?.toString()!,
         primary_email: formData.get("primary_email")?.toString()!,
@@ -71,7 +69,7 @@ export default async function Page({ params, searchParams }: { params: { uuid: s
                         type="email"
                         placeholder="Primary Email"
                         name="primary_email"
-                        defaultValue={user.email}
+                        defaultValue={user.primary_email}
                     />
                     <InputField
                         type="text"
